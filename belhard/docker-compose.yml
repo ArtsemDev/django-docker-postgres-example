@@ -1,0 +1,29 @@
+services:
+  db:
+    image: postgres
+    volumes:
+      - ./data/db:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_NAME=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_HOST_AUTH_METHOD=trust
+    ports:
+      - "5432:5432"
+  web:
+    build: .
+    command: python manage.py runserver 0.0.0.0:8070
+    volumes:
+      - .:/belhard
+    ports:
+      - "8070:8070"
+    environment:
+      - PG_NAME=postgres
+      - PG_USER=postgres
+      - PG_PASSWORD=postgres
+      - PG_PORT=5432
+      - SECRET_KEY=django-insecure-kukpv7vdb*@6x6f#j*25mm)wfy6(cg0v(x!^169a+o@5nm-&3n
+      - DEBUG=1
+      - ALLOWED_HOSTS=0.0.0.0|127.0.0.1
+    depends_on:
+      - db
