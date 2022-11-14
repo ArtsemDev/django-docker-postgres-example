@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h2>POST</h2>
+{{ post.name }}<br>
+{{ post.body }}
+<h2>COMMENT</h2>
+{% for comment in comments %}
+{% if not comment.recomment %}
+{{ comment.text }}<br>
+<!--{% for recomment in comments %}-->
+<!--{% if recomment.recomment.id == comment.id %}-->
+<!--<p>-->
+<!--    {{ recomment.text }}<br>-->
+<!--    <form method="post">-->
+<!--    {% csrf_token %}-->
+<!--    <input name="post" value="{{ post.id }}" hidden>-->
+<!--    <input name="recomment" value="{{ recomment.id }}" hidden>-->
+<!--    <input name="form" value="comment" hidden>-->
+<!--    {{ comment_form.name }}<br>-->
+<!--    {{ comment_form.email }}<br>-->
+<!--    {{ comment_form.text }}<br>-->
+<!--    <button>SEND</button>-->
+<!--</form>-->
+<!--</p>-->
+<!--{% endif %}-->
+<!--{% endfor %}-->
+<!--<form method="post">-->
+<!--    {% csrf_token %}-->
+<!--    <input name="post" value="{{ post.id }}" hidden>-->
+<!--    <input name="recomment" value="{{ comment.id }}" hidden>-->
+<!--    <input name="form" value="comment" hidden>-->
+<!--    {{ comment_form.name }}<br>-->
+<!--    {{ comment_form.email }}<br>-->
+<!--    {{ comment_form.text }}<br>-->
+<!--    <button>SEND</button>-->
+<!--</form>-->
+<hr>
+{% endif %}
+{% endfor %}
+
+{% if user.is_authenticated %}
+<form method="post">
+    {% csrf_token %}
+    <input name="post" value="{{ post.id }}" hidden>
+    <input name="form" value="comment" hidden>
+    <input name="author" value="{{ user.id }}" hidden>
+    {{ comment_form.text }}<br>
+    <button>SEND</button>
+</form>
+{% endif %}
+<form method="post">
+    {% csrf_token %}
+    <input name="form" value="newsletter" hidden>
+    {{ newsletter_form.email }}<br>
+    <button>send</button>
+</form>
+</body>
+</html>
