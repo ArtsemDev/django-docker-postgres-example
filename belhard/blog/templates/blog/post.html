@@ -6,7 +6,7 @@
 </head>
 <body>
 <h2>POST</h2>
-{{ post.name }}<br>
+{{ post.name|truncatechars:3 }}<br>
 {{ post.body }}
 <h2>COMMENT</h2>
 {% for comment in comments %}
@@ -49,7 +49,7 @@
     <input name="post" value="{{ post.id }}" hidden>
     <input name="form" value="comment" hidden>
     <input name="author" value="{{ user.id }}" hidden>
-    {{ comment_form.text }}<br>
+    {{ comment_form.text|truncatechars:3 }}<br>
     <button>SEND</button>
 </form>
 {% endif %}

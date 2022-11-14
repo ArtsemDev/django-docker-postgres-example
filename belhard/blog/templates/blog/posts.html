@@ -7,7 +7,7 @@
 <body>
 {% for post in posts %}
 <h1>{{ post.name }}</h1><br>
-{{ post.body }}<br>
+<a href="{{ post.slug }}">{{ post.body|truncatechars:5 }}</a><br>
 <a href="{{ post.slug }}">Detail</a>
 {% endfor %}
 </body>
